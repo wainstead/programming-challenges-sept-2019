@@ -3,7 +3,6 @@ of, between 1 and "n" inclusive
 
 """
 
-
 import sys
 import math
 import logging
@@ -11,6 +10,7 @@ import logging
 def prompt_for_max_value():
     """Prompt the user for the maximum number to guess.
 
+    Takes in the number via the input() function.
     Returns an integer.
 
     """
@@ -21,7 +21,7 @@ def prompt_for_max_value():
         try:
             max_number = input("Enter the maximum allowed guess: ")
         except EOFError:
-            # Player typed control-d; exit gracefully
+            logging.debug("User quit the game via control-d")
             sys.exit(0)
 
         try:
@@ -43,16 +43,19 @@ def prompt_for_max_value():
 def guess_answer_recursively(lower, upper, steps=1):
     """Use a binary search algorithm to determine the user's number.
 
-    Rather than looping, using recursion was a natural fit to the
-    problem.
+    Rather than looping, using recursion seemed like a natural fit to
+    the problem. Since we won't make more than 1 + log2(n) guesses we
+    won't recurse very deep.
 
     This function prompts the user asking if the current guess is low
     (l), high (h) or correct (c).
 
     """
 
-    assert steps < round(1+ math.log2(max_value)), "Ran out of runway"
+    assert steps < round(1+ math.log2(max_value)), "Took too many guesses"
 
+    # Known issue: the player may answer 'h' for 1, or 'l' for
+    # max_value. In either case they get the stack trace below.
     if (lower < -1) or (upper < -1) or (upper < lower):
         raise Exception("Oops bad math; did you give a mistaken answer?")
 
