@@ -1,0 +1,2 @@
+class Piece(object):
+    pass
