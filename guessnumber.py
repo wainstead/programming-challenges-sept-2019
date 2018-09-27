@@ -93,6 +93,16 @@ if __name__ == '__main__':
           "guess is too high, l if too low, or c if correct.")
 
     max_value = prompt_for_max_value()
-    (answer, steps) = guess_answer_recursively(1, max_value)
-    print("Your number is {}".format(answer))
-    print("That took {} steps to solve".format(steps))
+    game_results = []
+    still_playing = True
+
+    while still_playing:
+        (answer, steps) = guess_answer_recursively(1, max_value)
+        print("Your number is {}".format(answer))
+        print("It took me {} guesses".format(steps))
+        game_results.append(steps)
+        print("I averaged {:2.2f} guesses per game for {} game(s).".format(
+            sum(game_results) / len(game_results),
+            len(game_results)))
+        if input("Play again? [y/N] ") != 'y':
+            still_playing = False
