@@ -66,23 +66,33 @@ def guess_answer_recursively(lower, upper, steps=1):
         logging.debug("Answer is {}".format(upper))
         return (upper, steps)
 
-    answer = input("{}? ".format(middle))
+    answer = None
+    while answer not in ('l', 'h', 'c'):
+        try:
+            answer = input("{}? ".format(middle))
+        except EOFError:
+            logging.debug("User quit the game via control-d")
+            sys.exit(0)
 
-    if answer == 'l':
-        # Our guess is too low
-        steps += 1
-        return guess_answer_recursively(middle + 1, upper, steps)
-    elif answer == 'h':
-        # Our guess was too high
-        steps += 1
-        return guess_answer_recursively(lower, middle - 1, steps)
-    elif answer == 'c':
-        logging.debug("Your number is {}".format(middle))
-        return (middle, steps)
+        if answer == 'l':
+            # Our guess is too low
+            steps += 1
+            return guess_answer_recursively(middle + 1, upper, steps)
+        elif answer == 'h':
+            # Our guess was too high
+            steps += 1
+            return guess_answer_recursively(lower, middle - 1, steps)
+        elif answer == 'c':
+            logging.debug("Your number is {}".format(middle))
+            return (middle, steps)
+        else:
+            print("I don't know what '{}' means".format(answer))
+            print("Please answer with one of: l, h, c")
 
 
 if __name__ == '__main__':
 
+    # Log for debugging purposes
     logging.basicConfig(
         filename='guessnumber.log',
         level=logging.DEBUG,
