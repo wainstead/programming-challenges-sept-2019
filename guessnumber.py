@@ -1,9 +1,6 @@
 """Given an input number "n" guess what number the user is thinking
 of, between 1 and "n" inclusive
 
-required data structures:
-list of guesses per game
-
 """
 
 
@@ -90,6 +87,10 @@ if __name__ == '__main__':
         filename='guessnumber.log',
         level=logging.DEBUG,
         format='%(levelname)s:%(asctime)s:%(message)s')
+
+    print("In this game, you think of a number from 1 through n and\n"
+          "I will try to guess what it is.  After each guess, enter h if my\n"
+          "guess is too high, l if too low, or c if correct.")
 
     max_value = prompt_for_max_value()
     (answer, steps) = guess_answer_recursively(1, max_value)
