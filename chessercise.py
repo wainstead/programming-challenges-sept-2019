@@ -22,9 +22,5 @@ print("{} and {}".format(piece.name, position))
 board = Board()
 
 board.place_piece(piece, position)
-# board.get_moves(piece)
-
-
-# Algorithms.
-# Implement bishop as well as rook, and you have the queen.
-
+possible_moves = board.list_possible_moves(piece)
+print(", ".join(possible_moves))
