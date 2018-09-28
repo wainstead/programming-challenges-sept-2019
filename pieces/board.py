@@ -5,6 +5,16 @@ BOARD_MAX = 7
 class PositionError(Exception): pass
 
 class Board(object):
+    """Implements a chess board.
+
+    Internally we represent the board as a list of lists: a list of
+    length eight, representing the board rows from top to bottom, and
+    each row having a list of length eight representing the column
+    positions. This makes the math of calculating moves easier to
+    reason about.
+
+    """
+
     # For fast lookup of positions (is 'a9' a square?)
     # and for fast lookup of a piece's position
     squares = dict()
@@ -48,8 +58,7 @@ class Board(object):
                 possible_moves.append(self.chessboard[row][col])
             except IndexError:
                 pass
-        # XXX Remove duplicates. How did they get in there?
-        possible_moves = list(set(possible_moves))
+
         possible_moves.sort()
         return possible_moves
 
