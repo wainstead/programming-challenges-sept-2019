@@ -1,4 +1,4 @@
 from .piece import Piece
 
 class Knight(Piece):
-    pass
+    name = 'Knight'
