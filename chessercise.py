@@ -12,17 +12,19 @@ args = parser.parse_args()
 
 position = args.position.lower()
 
-print("{} and {}".format(piece, position))
+
 
 piece = create_piece(args.piece.lower())
 assert type(piece) in (Knight, Queen, Rook)
+
+print("{} and {}".format(piece.name, position))
+
 board = Board()
 
-# board.place_piece(piece, position)
+board.place_piece(piece, position)
 # board.get_moves(piece)
+
+
 # Algorithms.
-
-# unittest. The code has to be testable.
-
 # Implement bishop as well as rook, and you have the queen.
 

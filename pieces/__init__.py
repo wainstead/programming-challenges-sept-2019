@@ -1,4 +1,4 @@
-from .board import Board
+from .board import (Board, PositionError)
 from .knight import Knight
 from .queen import Queen
 from .rook import Rook
