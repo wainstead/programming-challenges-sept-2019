@@ -4,7 +4,4 @@ class Rook(Piece):
     name = 'Rook'
 
     def moves_algorithm(self, coordinates):
-        (row, col) = coordinates
-        horizontal = [(r, col) for r in range(8) if r != row]
-        vertical = [(row, c) for c in range(8) if c != col]
-        return horizontal + vertical
+        return self._determine_horizontal_and_vertical_moves(coordinates)
