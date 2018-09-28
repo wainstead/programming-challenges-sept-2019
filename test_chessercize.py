@@ -35,7 +35,8 @@ class TestPieces(unittest.TestCase):
         r = Rook()
         b = Board()
         b.place_piece(r, 'd2')
-        assert b.squares[b.chessboard[6][3]] == r
+        assert b.squares[b.chessboard[6][3]] == [(6, 3), r], \
+            b.squares[b.chessboard[6][3]]
 
     def test_bad_position(self):
         r = Rook()
@@ -46,6 +47,17 @@ class TestPieces(unittest.TestCase):
         except PositionError:
             failed_correctly = True
         assert failed_correctly
+
+    def test_knight_moves(self):
+        k = Knight()
+        b = Board()
+        b.place_piece(k, 'a8')
+        assert b.list_possible_moves(k) == ['b6', 'c7'], \
+            b.list_possible_moves(k)
+        b.clear_board()
+        b.place_piece(k, 'h1')
+        assert b.list_possible_moves(k) == ['f2', 'g3'], \
+            b.list_possible_moves(k)
 
     def tearDown(self):
         pass

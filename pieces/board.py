@@ -19,18 +19,45 @@ class Board(object):
                 #print("setting %s %s" % (row_num, col_letters[col]))
                 position = "{}{}".format(col_letters[col], row_num)
                 self.chessboard[row][col] = position
-                self.squares[position] = None
+                self.squares[position] = [(row, col), None]
+
+    def clear_board(self):
+        for position in self.squares:
+            self.squares[position][1] = None
 
     def place_piece(self, piece, position):
         if not position in self.squares:
             raise PositionError()
-        self.squares[position] = piece
+        self.squares[position][1] = piece
+
+    def _get_piece_position(self, piece):
+        for position in self.squares:
+            if self.squares[position][1] == piece:
+                return self.squares[position][0]
+
+    def list_possible_moves(self, piece):
+        piece_coordinates = self._get_piece_position(piece)
+        moves_coordinates = piece.moves_algorithm(piece_coordinates)
+        possible_moves = list()
+        for (row, col) in moves_coordinates:
+            try:
+                possible_moves.append(self.chessboard[row][col])
+            except IndexError:
+                pass
+        # XXX Remove duplicates. How did they get in there?
+        possible_moves = list(set(possible_moves))
+        possible_moves.sort()
+        return possible_moves
 
     def __repr__(self):
         board_as_str = ""
         for row in range(8):
             for col in range(8):
-                board_as_str += "{}, {}: {} ".format(
+                board_as_str += "({}, {}: {}) ".format(
                     row, col, self.chessboard[row][col])
             board_as_str += "\n"
+        for position in self.squares:
+            if self.squares[position][1]:
+                board_as_str += "{}: {}\n".format(
+                    position, self.squares[position][1].name)
         return board_as_str
