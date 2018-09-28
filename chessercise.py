@@ -1,7 +1,6 @@
-from pieces import Rook
-
-# User input.
 import argparse
+from pieces import Board, create_piece, Knight, Queen, Rook
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-piece', dest='piece', required=True,
@@ -11,11 +10,16 @@ parser.add_argument('-position', dest='position', required=True,
 
 args = parser.parse_args()
 
-assert args.piece and args.position
+position = args.position.lower()
 
-print("{} and {}".format(args.piece, args.position))
+print("{} and {}".format(piece, position))
 
+piece = create_piece(args.piece.lower())
+assert type(piece) in (Knight, Queen, Rook)
+board = Board()
 
+# board.place_piece(piece, position)
+# board.get_moves(piece)
 # Algorithms.
 
 # unittest. The code has to be testable.
