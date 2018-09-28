@@ -1,4 +1,9 @@
 class Piece(object):
+    """Base class for chess pieces.
+
+    Define the algorithm interface and any common methods.
+
+    """
 
     def moves_algorithm(self):
         raise Exception("Subclasses must implement")

@@ -1,3 +1,6 @@
+"""This module holds classes and functions for an implementation of chess."""
+
+
 from .board import (Board, PositionError)
 from .knight import Knight
 from .queen import Queen
