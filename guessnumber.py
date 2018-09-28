@@ -50,6 +50,9 @@ def guess_answer_recursively(lower, upper, steps=1):
     This function prompts the user asking if the current guess is low
     (l), high (h) or correct (c).
 
+    Raises vanilla Exception if the user likely told us 'h' when it
+    was 'l' or vice versa.
+
     """
 
     assert steps < round(1+ math.log2(max_value)), "Took too many guesses"
