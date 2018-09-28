@@ -1,3 +1,7 @@
+BOARD_MIN = 0
+BOARD_MAX = 7
+
+
 class PositionError(Exception): pass
 
 class Board(object):
