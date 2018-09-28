@@ -7,15 +7,18 @@ class TestPieces(unittest.TestCase):
     def setUp(self):
         pass
 
+
     def test_constructors(self):
         b = Board()
         r = Rook()
         q = Queen()
         k = Knight()
 
+
     def test_pieces_by_name(self):
         for piece in ('knight', 'queen', 'rook'):
             create_piece(piece)
+
 
     def test_bogus_piece(self):
         failed_correctly = False
@@ -26,10 +29,12 @@ class TestPieces(unittest.TestCase):
 
         assert failed_correctly, "Created nonexistent piece!"
 
+
     def test_chessboard(self):
         b = Board()
         assert b.chessboard[0][0] == 'a8', b.chessboard[0][0]
         assert b.chessboard[7][7] == 'h1', b.chessboard[7][7]
+
 
     def test_placing_piece(self):
         r = Rook()
@@ -37,6 +42,7 @@ class TestPieces(unittest.TestCase):
         b.place_piece(r, 'd2')
         assert b.squares[b.chessboard[6][3]] == [(6, 3), r], \
             b.squares[b.chessboard[6][3]]
+
 
     def test_bad_position(self):
         r = Rook()
@@ -48,6 +54,7 @@ class TestPieces(unittest.TestCase):
             failed_correctly = True
         assert failed_correctly
 
+
     def test_knight_moves(self):
         k = Knight()
         b = Board()
@@ -58,6 +65,16 @@ class TestPieces(unittest.TestCase):
         b.place_piece(k, 'h1')
         assert b.list_possible_moves(k) == ['f2', 'g3'], \
             b.list_possible_moves(k)
+
+
+    def test_rook_moves(self):
+        r = Rook()
+        b = Board()
+        b.place_piece(r, 'd2')
+        assert b.list_possible_moves(r) == [
+            'a2', 'b2', 'c2', 'd1', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'e2',
+            'f2', 'g2', 'h2'], b.list_possible_moves(r)
+
 
     def tearDown(self):
         pass
