@@ -1,2 +1,3 @@
 class Piece(object):
-    pass
+    def moves_algorithm(self):
+        raise Exception("Subclasses must implement")
