@@ -76,6 +76,17 @@ class TestPieces(unittest.TestCase):
             'f2', 'g2', 'h2'], b.list_possible_moves(r)
 
 
+    def test_queen_moves(self):
+        q = Queen()
+        b = Board()
+        b.place_piece(q, 'd2')
+        assert b.list_possible_moves(q) == [
+            'a2', 'a5', 'b2', 'b4', 'c1', 'c2',
+            'c3', 'd1', 'd3', 'd4', 'd5', 'd6',
+            'd7', 'd8', 'e1', 'e2', 'e3', 'f2',
+            'f4', 'g2', 'g5', 'h2', 'h6'], b.list_possible_moves(q)
+
+
     def tearDown(self):
         pass
 
