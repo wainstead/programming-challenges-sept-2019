@@ -3,7 +3,6 @@ from .board import BOARD_MIN, BOARD_MAX
 
 class Knight(Piece):
     name = 'Knight'
-    move_params = list()
 
     def __init__(self):
         """Set up a list of move parameters.
@@ -12,6 +11,7 @@ class Knight(Piece):
         life of the piece.
 
         """
+        self.move_params = list()
 
         for x in (2, -2):
             for y in (1, -1):

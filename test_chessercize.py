@@ -56,19 +56,11 @@ class TestPieces(unittest.TestCase):
 
 
     def test_knight_moves(self):
-        """This test contains a defect where the positions returned are
-        duplicated; for now, I am uniq'ing and sorting the results to get
-        around this but by the deadline have not identified why this happens
-        in the test but not from the command line.
-
-        """
-
         k = Knight()
         b = Board()
 
         b.place_piece(k, 'a8')
         possible_moves = b.list_possible_moves(k)
-        possible_moves = list(set(possible_moves))
         possible_moves.sort()
         assert possible_moves  == ['b6', 'c7'], possible_moves
 
@@ -76,7 +68,6 @@ class TestPieces(unittest.TestCase):
 
         b.place_piece(k, 'h1')
         possible_moves = b.list_possible_moves(k)
-        possible_moves = list(set(possible_moves))
         possible_moves.sort()
         assert possible_moves == ['f2', 'g3'], possible_moves
 
